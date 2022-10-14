@@ -1,3 +1,5 @@
+.env
+[Dd]ummy*
 fastapi_timbangan-master/__pycache__
 fastapi_timbangan-master/sql_app/__pycache__
 fastapi_timbangan-master/linux_env
