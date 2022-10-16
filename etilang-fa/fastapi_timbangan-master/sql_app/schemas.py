@@ -47,33 +47,33 @@ class TokenData(BaseModel):
 
 class ViewTilang(BaseModel):
 
-    nama: str
+    nama: Union[str, None] = None
     no_reg_tilang: str
-    no_ranmor: str
-    kode_ins: str
-    no_briva: str
-    denda: int
-    bp: int
-    pasal: str
-    tgl_sidang: str
+    no_ranmor: Union[str, None] = None
+    kode_ins: Union[str, None] = None
+    no_briva: Union[str, None] = None
+    denda: Union[int, None] = None
+    bp: Union[int, None] = None
+    pasal: Union[str, None] = None
+    tgl_sidang: Union[str, None] = None
 
     class Config:
         orm_mode = True
 
-# endpoint 2
+# endpoint 3
 
 
 class ViewStatusPembayaran(BaseModel):
 
     no_reg_tilang: str
-    kode_billing: str
-    ntpn: str
-    payment_date: str
-    tgl_pembukuan: str
-    channel: str
-    bank_persepsi: str
-    ca_name: str
-    channel_type_name: str
+    kode_billing: Union[str, None] = None
+    ntpn: Union[str, None] = None
+    payment_date: Union[str, None] = None
+    tgl_pembukuan: Union[str, None] = None
+    channel: Union[str, None] = None
+    bank_persepsi: Union[str, None] = None
+    ca_name: Union[str, None] = None
+    channel_type_name: Union[str, None] = None
 
     class Config:
         orm_mode = True
@@ -84,12 +84,12 @@ class ViewStatusPembayaran(BaseModel):
 class ViewStatusPengambilanSisaTitipan(BaseModel):
 
     no_reg_tilang: str
-    briva: str
-    lokasi: str
-    tgl_ambil: str
-    rekening: str
-    bank: str
-    email: str
+    briva: Union[str, None] = None
+    lokasi: Union[str, None] = None
+    tgl_ambil: Union[str, None] = None
+    rekening: Union[str, None] = None
+    bank: Union[str, None] = None
+    email: Union[str, None] = None
 
     class Config:
         orm_mode = True
@@ -99,16 +99,16 @@ class ViewStatusPengambilanSisaTitipan(BaseModel):
 
 class ViewDaftarPerkara(BaseModel):
 
-    nama: str
+    nama:  Union[str, None] = None
     no_reg_tilang: str
     no_ranmor: Union[str, None] = None
-    kode_ins: str
+    kode_ins:  Union[str, None] = None
     no_briva: Union[str, None] = None
-    denda: str
-    bp: str
+    denda:  Union[str, None] = None
+    bp:  Union[str, None] = None
     pasal: Union[str, None] = None
-    tgl_sidang: str
-    is_titip: str
+    tgl_sidang:  Union[str, None] = None
+    is_titip:  Union[str, None] = None
     uang_titipan: Union[int, None] = None
     tgl_bayar: Union[str, None] = None
 
@@ -121,9 +121,9 @@ class ViewDaftarPerkara(BaseModel):
 class ViewTilangSatker(BaseModel):
 
     kode_ins: str
-    jml: int
-    denda: int
-    bp: int
+    jml: Union[int, None] = None
+    denda: Union[int, None] = None
+    bp: Union[int, None] = None
 
     class Config:
         orm_mode = True

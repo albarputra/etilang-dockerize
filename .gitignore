@@ -1,5 +1,5 @@
-.env
 [Dd]ummy*
-fastapi_timbangan-master/__pycache__
-fastapi_timbangan-master/sql_app/__pycache__
-fastapi_timbangan-master/linux_env
+etilang-fa/fastapi_timbangan-master/.env
+etilang-fa/fastapi_timbangan-master/__pycache__
+etilang-fa/fastapi_timbangan-master/sql_app/__pycache__
+etilang-fa/fastapi_timbangan-master/linux_env

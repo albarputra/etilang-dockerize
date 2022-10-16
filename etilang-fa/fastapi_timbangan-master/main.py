@@ -107,7 +107,8 @@ app.add_middleware(
 @app.middleware("http")
 async def db_session_middleware(request: Request, call_next):
     response = Response("Internal server error",
-                        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                        detail="Tidak Terhubung Ke DB")
     try:
         request.state.db = SessionLocal()
         response = await call_next(request)
