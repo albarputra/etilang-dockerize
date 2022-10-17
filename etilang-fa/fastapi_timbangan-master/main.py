@@ -512,27 +512,34 @@ async def get_rekap_data_putusan(
 
 @router.get("/briva/{kode}", response_model=List[schemas.ViewBriva], status_code=status.HTTP_200_OK, tags=[schemas.Tags.briva])
 async def get_briva(kode: str, db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"})
-    getkode = crud.get_briva(db, kode=kode)
-    try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        username: str = payload.get("sub")
-        if username is None:
-            raise credentials_exception
-        token_data = schemas.TokenData(username=username)
-        user = crud.get_user_by_username(db, username=token_data.username)
-    except JWTError:
-        raise credentials_exception
-    if user is None:
-        raise credentials_exception
-    elif getkode is None:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="kode tidak ditemui")
 
-    return getkode
+    if len(kode) == 15 and re.match(r'^([\s\d]+)$', kode):
+
+        credentials_exception = HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Could not validate credentials",
+            headers={"WWW-Authenticate": "Bearer"})
+
+        getkode = crud.get_briva(db, kode=kode)
+        try:
+            payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+            username: str = payload.get("sub")
+            if username is None:
+                raise credentials_exception
+            token_data = schemas.TokenData(username=username)
+            user = crud.get_user_by_username(db, username=token_data.username)
+        except JWTError:
+            raise credentials_exception
+        if user is None:
+            raise credentials_exception
+        elif getkode is None:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail="kode tidak ditemui")
+
+        return getkode
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="invalid param")
 
 
 app.include_router(router)
