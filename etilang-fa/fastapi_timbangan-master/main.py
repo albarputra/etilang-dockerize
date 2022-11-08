@@ -347,8 +347,10 @@ async def get_status_pengambilan(no_reg_tilang: str, db: Session = Depends(get_d
 async def get_daftar_perkara(
         kode_ins: str,
         tgl_sidang: str,
-        skip: int = 0,
-        limit: int = 100,
+        # skip: int = 0,
+        # limit: int = 100,
+        limit: int = Query(default=5000),
+
         db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -356,7 +358,7 @@ async def get_daftar_perkara(
         headers={"WWW-Authenticate": "Bearer"})
 
     daftar_perkara = crud.get_daftar_perkara(
-        db, kode_ins=kode_ins, tgl_sidang=tgl_sidang, skip=skip, limit=limit)
+        db, kode_ins=kode_ins, tgl_sidang=tgl_sidang, limit=limit)
 
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
@@ -426,8 +428,9 @@ async def get_daftar_perkara_setor(
         tahun: int,
         payment_date: str,
         tipe: str,
-        skip: int = 0,
-        limit: int = 100,
+        # skip: int = 0,
+        # limit: int = 100,
+        limit: int = Query(default=5000),
         db: Session = Depends(get_db),
         token: str = Depends(oauth2_scheme)):
     credentials_exception = HTTPException(
@@ -451,7 +454,7 @@ async def get_daftar_perkara_setor(
         tahun=tahun,
         payment_date=payment_date,
         tipe=tipe,
-        skip=skip,
+        # skip=skip,
         limit=limit
     )
 

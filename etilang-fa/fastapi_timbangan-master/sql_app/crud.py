@@ -105,13 +105,13 @@ def get_status_pengambilan_sisa_titipan(db: Session, no_reg_tilang: str):
 # endpoint 7
 
 
-def get_daftar_perkara(db: Session, kode_ins: str, tgl_sidang: str, skip: int, limit: int):
+def get_daftar_perkara(db: Session, kode_ins: str, tgl_sidang: str, limit: int):
     getgroup = db.query(models.ViewDaftarPerkara).filter(
         and_(
             models.ViewDaftarPerkara.kode_ins == kode_ins,
             models.ViewDaftarPerkara.tgl_sidang == tgl_sidang
         )
-    ).offset(skip).limit(limit).all()
+    ).limit(limit).all()
     return getgroup
 
 
@@ -146,7 +146,7 @@ def get_daftar_perkara_setor(
         tahun: int,
         payment_date: str,
         tipe: str,
-        skip: int,
+        # skip: int,
         limit: int
 ):
     data_req = db.query(models.ViewDaftarPerkaraSetor).filter(
@@ -156,7 +156,7 @@ def get_daftar_perkara_setor(
             models.ViewDaftarPerkaraSetor.tahun == tahun,
             models.ViewDaftarPerkaraSetor.payment_date == payment_date,
             models.ViewDaftarPerkaraSetor.tipe == tipe,
-        )).offset(skip).limit(limit).all()
+        )).limit(limit).all()
 
     return data_req
 
