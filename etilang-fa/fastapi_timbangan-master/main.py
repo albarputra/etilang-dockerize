@@ -371,6 +371,9 @@ async def get_daftar_perkara(
         raise credentials_exception
     if user is None:
         raise credentials_exception
+    elif limit > 5000:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="limit terlalu banyak")
     elif len(daftar_perkara) == 0:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="perkara tidak di temukan")
@@ -461,6 +464,9 @@ async def get_daftar_perkara_setor(
     if len(daftar_perkara_setor) == 0:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="perkara tidak di temukan")
+    elif limit > 5000:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="limit terlalu banyak")
 
     return daftar_perkara_setor
 
