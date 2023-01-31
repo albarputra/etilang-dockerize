@@ -84,7 +84,7 @@ app = FastAPI(title="e-tilang",
               description="E-TILANG KEJAKSAAN",
               version="0.0.1",
               redoc_url="/",
-              openapi_url="/api/v1/openapi.json",
+              openapi_url="/openapi.json",
               contact={
                   "name": "Info Pengaduan",
                   "url": "https://tilang.kejaksaan.go.id/info/pengaduan"
